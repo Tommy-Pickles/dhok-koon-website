@@ -57,6 +57,7 @@
     if (cover && cfg.coverImageUrl) {
       cover.src = cfg.coverImageUrl;
       cover.onerror = function() { console.error('Cover image not found:', cfg.coverImageUrl); };
+      cover.onload = function() { cover.classList.add('loaded'); };
     }
 
     // Directions CTA
@@ -107,6 +108,7 @@
 
     if (cfg.menu) {
       renderMenuSection('menu-section-entrees', cfg.menu.entrees);
+      renderMenuSection('menu-section-soups', cfg.menu.soups);
       renderMenuSection('menu-section-mains', cfg.menu.mains);
       renderMenuSection('menu-section-desserts', cfg.menu.desserts);
     }
