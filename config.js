@@ -4,7 +4,7 @@ window.SITE_CONFIG = {
   phoneNumber: "+61 2 4283 7777",
   tagline: "Authentic Thai cuisine in Fairy Meadow — generous portions, lunch & dinner service.",
   hoursSummary: "Open today 11:00 am–2:30 pm & 5:00 pm–9:30 pm",
-  coverImageUrl: "dhok-koon-cover-image.jpg",
+  coverImageUrl: "new-landing-image.jpg",
   addressLines: [
     "Shop 1 / 23-25 Princes Hwy",
     "Fairy Meadow NSW 2519",

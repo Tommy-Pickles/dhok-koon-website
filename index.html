@@ -7,124 +7,173 @@
     <meta name="description" content="Authentic Thai cuisine in Fairy Meadow — generous portions, lunch & dinner service">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <!-- Call bar / Top nav -->
-    <div id="call-bar" class="call-bar" role="region" aria-label="Top navigation">
-      <div class="container callbar-inner">
-        <a id="logo-link" class="logo" href="#home" aria-label="Home">
-          <img id="logo-image" src="" alt="Logo" class="logo-img" />
-          <span id="business-name" class="logo-text"></span>
+
+    <!-- Navigation -->
+    <nav id="site-nav" class="site-nav" role="navigation" aria-label="Primary">
+      <div class="nav-inner">
+        <a id="logo-link" class="nav-logo" href="#home" aria-label="Home">
+          <img id="logo-image" src="" alt="Logo" class="nav-logo-img" />
         </a>
-        <nav class="top-nav" aria-label="Primary">
-          <a href="#about" class="top-link">About</a>
-          <a href="#menu" class="top-link">Menu</a>
-          <a href="#reviews" class="top-link">Reviews</a>
-          <a href="#contact" class="top-link">Contact</a>
-        </nav>
-        <!-- Socials will be injected by JS only if configured -->
+        <div class="nav-links">
+          <a href="#menu" class="nav-link">Menu</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#reviews" class="nav-link">Reviews</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </div>
+        <a id="nav-phone" class="nav-phone" href="#">
+          <span class="nav-phone-text"></span>
+        </a>
+        <button id="menu-toggle" class="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
       </div>
-    </div>
-
-    <!-- Header -->
-    <header class="site-header">
-      <div class="container header-inner">
-        <div class="header-actions"></div>
+      <div id="mobile-nav" class="mobile-nav" hidden>
+        <a href="#menu" class="mobile-link">Menu</a>
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#reviews" class="mobile-link">Reviews</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a id="mobile-phone" class="mobile-link mobile-phone" href="#">Call to Reserve</a>
       </div>
-    </header>
+    </nav>
 
-    <!-- Main -->
     <main id="home">
-      <!-- Hero / About -->
-      <section id="about" class="hero">
-        <div class="container hero-inner">
-          <div class="hero-content">
-            <h1 id="headline" class="headline"></h1>
-            <p id="tagline" class="tagline"></p>
-            <p id="hours-summary" class="hours-summary"></p>
-            <div class="hero-actions">
-              <a id="cta-contact" class="btn primary" href="#contact">Contact Us</a>
-              <a id="cta-directions" class="btn" href="#" target="_blank" rel="noopener">Get Directions</a>
-              <a id="cta-menu" class="btn" href="#menu">Menu</a>
-            </div>
-          </div>
-          <figure class="hero-media">
-            <img id="cover-image" src="" alt="Cover image" class="cover-img" />
-          </figure>
-        </div>
-      </section>
 
-      <!-- Menu Section with subsections -->
-      <section id="menu" class="section">
-        <div class="container">
-          <h2>Menu</h2>
-          <div class="menu-quicknav" role="navigation" aria-label="Menu sections">
-            <a class="pill" href="#menu-entrees">Entrees</a>
-            <a class="pill" href="#menu-mains">Mains</a>
-            <a class="pill" href="#menu-desserts">Desserts</a>
-          </div>
-          <h3 class="menu-heading">Entrees</h3>
-          <div id="menu-entrees" class="menu-container"></div>
-          <h3 class="menu-heading">Mains</h3>
-          <div id="menu-mains" class="menu-container"></div>
-          <h3 class="menu-heading">Desserts</h3>
-          <div id="menu-desserts" class="menu-container"></div>
+      <!-- Hero -->
+      <section id="hero" class="hero">
+        <div class="hero-bg">
+          <img id="cover-image" src="" alt="Thai cuisine" class="hero-bg-img" />
         </div>
-      </section>
-
-      <!-- Contact Section -->
-      <section id="contact" class="section">
-        <div class="container">
-          <h2>Contact</h2>
-          <div class="contact-card">
-            <div class="contact-grid">
-              <a id="btn-address" class="btn contact" href="#" target="_blank" rel="noopener">
-                <span class="btn-label">Address</span>
-                <span id="btn-address-text" class="btn-value"></span>
-              </a>
-              <a id="btn-email" class="btn contact" href="#">
-                <span class="btn-label">Email</span>
-                <span id="btn-email-text" class="btn-value"></span>
-              </a>
-              <a id="btn-phone" class="btn contact" href="#">
-                <span class="btn-label">Call</span>
-                <span id="btn-phone-text" class="btn-value"></span>
-              </a>
-            </div>
-            <div class="hours-card">
-              <div class="hours-title">Opening Hours</div>
-              <div id="contact-hours" class="hours"></div>
-            </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" data-reveal="fade-up">
+          <p class="hero-eyebrow">Fairy Meadow, NSW</p>
+          <h1 id="headline" class="hero-title"></h1>
+          <p id="tagline" class="hero-subtitle"></p>
+          <div class="hero-meta">
+            <span id="hours-summary" class="hero-hours"></span>
+          </div>
+          <div class="hero-actions">
+            <a id="cta-menu" class="btn-hero primary" href="#menu">View Our Menu</a>
+            <a id="cta-directions" class="btn-hero" href="#" target="_blank" rel="noopener">Get Directions</a>
           </div>
         </div>
       </section>
 
-      <!-- Reviews Section -->
-      <section id="reviews" class="section">
+      <!-- About -->
+      <section id="about" class="section section-about">
         <div class="container">
-          <h2>Reviews</h2>
-          <div id="reviews-summary" class="reviews-summary"></div>
-          <div id="reviews-list" class="reviews-list"></div>
+          <div class="about-content" data-reveal="fade-up">
+            <span class="section-label">Our Story</span>
+            <h2>A Taste of Thailand in Fairy Meadow</h2>
+            <p class="about-text">We bring the vibrant flavours of Thailand to the Illawarra, with dishes crafted from traditional recipes and the freshest local ingredients. Whether you're joining us for a relaxed lunch or an evening out, every meal is prepared with care and served with warmth.</p>
+          </div>
         </div>
       </section>
+
+      <!-- Menu -->
+      <section id="menu" class="section section-menu">
+        <div class="container">
+          <div class="section-header" data-reveal="fade-up">
+            <span class="section-label">Dine With Us</span>
+            <h2>Our Menu</h2>
+          </div>
+          <div class="menu-nav" role="navigation" aria-label="Menu sections" data-reveal="fade-up">
+            <a class="menu-tab" href="#menu-entrees">Entrees</a>
+            <a class="menu-tab" href="#menu-mains">Mains</a>
+            <a class="menu-tab" href="#menu-desserts">Desserts</a>
+          </div>
+
+          <div class="menu-section" id="menu-section-entrees">
+            <h3 class="menu-category" id="menu-entrees">Entrees</h3>
+            <div class="menu-items"></div>
+          </div>
+
+          <div class="menu-section" id="menu-section-mains">
+            <h3 class="menu-category" id="menu-mains">Mains</h3>
+            <div class="menu-items"></div>
+          </div>
+
+          <div class="menu-section" id="menu-section-desserts">
+            <h3 class="menu-category" id="menu-desserts">Desserts</h3>
+            <div class="menu-items"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="section section-reviews">
+        <div class="container">
+          <div class="section-header" data-reveal="fade-up">
+            <span class="section-label">Guest Experiences</span>
+            <h2>What Our Guests Say</h2>
+          </div>
+          <div id="reviews-summary" class="reviews-summary" data-reveal="fade-up"></div>
+          <div id="reviews-list" class="reviews-grid"></div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="section section-contact">
+        <div class="container">
+          <div class="contact-layout">
+            <div class="contact-info" data-reveal="fade-up">
+              <span class="section-label">Visit Us</span>
+              <h2>Make a Reservation</h2>
+              <p class="contact-intro">Join us for lunch or dinner. Walk-ins are welcome, or call ahead for larger parties.</p>
+              <div class="contact-details">
+                <a id="btn-phone" class="contact-item" href="#">
+                  <span class="contact-icon">tel</span>
+                  <span class="contact-item-content">
+                    <span class="contact-item-label">Call Us</span>
+                    <span id="btn-phone-text" class="contact-item-value"></span>
+                  </span>
+                </a>
+                <a id="btn-address" class="contact-item" href="#" target="_blank" rel="noopener">
+                  <span class="contact-icon">pin</span>
+                  <span class="contact-item-content">
+                    <span class="contact-item-label">Find Us</span>
+                    <span id="btn-address-text" class="contact-item-value"></span>
+                  </span>
+                </a>
+                <a id="btn-email" class="contact-item" href="#">
+                  <span class="contact-icon">mail</span>
+                  <span class="contact-item-content">
+                    <span class="contact-item-label">Email</span>
+                    <span id="btn-email-text" class="contact-item-value"></span>
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div class="contact-hours" data-reveal="fade-up" data-reveal-delay="100">
+              <h3 class="hours-heading">Opening Hours</h3>
+              <div id="contact-hours" class="hours-table"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <small id="footer-text">© <span id="year"></span> <span id="footer-business-name"></span>. All rights reserved.</small>
+      <div class="container footer-inner">
+        <a class="footer-logo" href="#home" aria-label="Home">
+          <img id="footer-logo-image" src="" alt="Logo" class="footer-logo-img" />
+        </a>
+        <small id="footer-text">&copy; <span id="year"></span> <span id="footer-business-name"></span></small>
       </div>
     </footer>
 
     <!-- Floating Call Button -->
-    <a id="floating-call" class="fab-call" href="#" aria-label="Call">
-      <span class="call-emoji">📞</span>
-      <span class="call-text">Call</span>
+    <a id="floating-call" class="fab-call" href="#" aria-label="Call to reserve">
+      <svg class="fab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span class="fab-text">Reserve</span>
     </a>
 
     <script src="config.js"></script>
     <script src="app.js"></script>
   </body>
-  </html>
-
+</html>
