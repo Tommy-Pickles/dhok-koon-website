@@ -5,7 +5,7 @@ window.SITE_CONFIG = {
   phoneNumber2: "(02) 4285 3984",
   tagline: "Authentic Thai cuisine in Fairy Meadow — generous portions, lunch & dinner service.",
   hoursSummary: "Open 7 days · Lunch 11:00am–2:30pm · Dinner 5:00pm–9:30pm",
-  coverImageUrl: "dhokoon-cover-tables.png",
+  coverImageUrl: "dhokoon-cover-tables.jpg",
   addressLines: [
     "1/23–25 Princes Hwy",
     "Fairy Meadow NSW 2519",
