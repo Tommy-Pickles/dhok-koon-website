@@ -342,10 +342,10 @@ body {
   z-index: 1;
   background:
     linear-gradient(180deg,
-      rgba(26,9,20,0.22) 0%,
-      rgba(26,9,20,0.05) 25%,
-      rgba(26,9,20,0.15) 55%,
-      rgba(26,9,20,0.82) 100%
+      rgba(26,9,20,0.40) 0%,
+      rgba(26,9,20,0.20) 20%,
+      rgba(26,9,20,0.55) 50%,
+      rgba(26,9,20,0.95) 100%
     );
 }
 
@@ -372,13 +372,13 @@ body {
 
 .hero-eyebrow {
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--gold-light);
+  color: rgba(255,255,255,0.95);
   margin: 0 0 0.75rem;
-  opacity: 0.9;
+  text-shadow: 0 1px 16px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6);
 }
 
 /* Ornamental line above title */
@@ -418,20 +418,21 @@ body {
   letter-spacing: -0.01em;
   margin: 0 0 1.25rem;
   color: #fff;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 24px rgba(0,0,0,0.6);
 }
 
 .hero-subtitle {
   font-family: var(--font-accent);
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   font-weight: 400;
   font-style: italic;
   line-height: 1.7;
-  color: rgba(255,255,255,0.82);
+  color: rgba(255,255,255,0.92);
   margin: 0 0 1.25rem;
   max-width: 480px;
   margin-left: auto;
   margin-right: auto;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.4);
 }
 
 .hero-meta {
@@ -439,10 +440,11 @@ body {
 }
 
 .hero-hours {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
 }
 
 .hero-actions {
@@ -647,22 +649,28 @@ body {
 
 .menu-nav {
   display: flex;
+  flex-wrap: wrap;
   gap: 0;
   margin-bottom: 3.5rem;
   border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
 }
 
-.menu-nav::-webkit-scrollbar { display: none; }
+@media (min-width: 768px) {
+  .menu-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu-nav::-webkit-scrollbar { display: none; }
+}
 
 .menu-tab {
   display: inline-block;
-  padding: 0.875rem 1.625rem;
+  padding: 0.75rem 1rem;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -670,6 +678,13 @@ body {
   margin-bottom: -1px;
   transition: all 0.25s var(--ease);
   white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .menu-tab {
+    padding: 0.875rem 1.625rem;
+    font-size: 0.75rem;
+  }
 }
 
 .menu-tab:hover {
