@@ -421,7 +421,7 @@ body {
 
 .hero-subtitle {
   font-family: var(--font-accent);
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 400;
   font-style: italic;
   line-height: 1.7;
@@ -438,7 +438,7 @@ body {
 }
 
 .hero-hours {
-  font-size: 0.875rem;
+  font-size: 1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.8);
