@@ -22,10 +22,12 @@
       footerLogoImg.src = cfg.logoUrl;
     }
 
+    function cleanPhone(p) { return (p || '').replace(/\s|\(|\)|–|-/g, ''); }
+
     // Floating call button
     var floatingCall = document.getElementById('floating-call');
     if (cfg.phoneNumber && floatingCall) {
-      floatingCall.href = 'tel:' + cfg.phoneNumber.replace(/\s|\(|\)|-/g, '');
+      floatingCall.href = 'tel:' + cleanPhone(cfg.phoneNumber);
     } else if (floatingCall) {
       floatingCall.setAttribute('hidden', '');
     }
@@ -34,7 +36,7 @@
     var navPhone = document.getElementById('nav-phone');
     var navPhoneText = navPhone && navPhone.querySelector('.nav-phone-text');
     if (navPhone && cfg.phoneNumber) {
-      navPhone.href = 'tel:' + cfg.phoneNumber.replace(/\s|\(|\)|-/g, '');
+      navPhone.href = 'tel:' + cleanPhone(cfg.phoneNumber);
       if (navPhoneText) navPhoneText.textContent = cfg.phoneNumber;
     } else if (navPhone) {
       navPhone.setAttribute('hidden', '');
@@ -43,7 +45,7 @@
     // Mobile phone link
     var mobilePhone = document.getElementById('mobile-phone');
     if (mobilePhone && cfg.phoneNumber) {
-      mobilePhone.href = 'tel:' + cfg.phoneNumber.replace(/\s|\(|\)|-/g, '');
+      mobilePhone.href = 'tel:' + cleanPhone(cfg.phoneNumber);
     } else if (mobilePhone) {
       mobilePhone.setAttribute('hidden', '');
     }
@@ -72,14 +74,16 @@
       ctaDirections.setAttribute('hidden', '');
     }
 
-    // Menu rendering — elegant list format
-    function renderMenuSection(sectionId, items) {
+    // Menu rendering — name + price shown; click to reveal description
+    function renderMenuSection(sectionId, data) {
       var section = document.getElementById(sectionId);
       if (!section) return;
       var container = section.querySelector('.menu-items');
-      if (!container || !Array.isArray(items) || items.length === 0) {
+      // Support both array format and {priceGuide, items} format
+      var items = Array.isArray(data) ? data : (data && data.items) || [];
+      var priceGuide = (!Array.isArray(data) && data && data.priceGuide) || null;
+      if (!container || items.length === 0) {
         section.style.display = 'none';
-        // Also hide corresponding menu tab
         var categoryEl = section.querySelector('.menu-category');
         if (categoryEl) {
           var tabHref = '#' + categoryEl.id;
@@ -88,38 +92,68 @@
         }
         return;
       }
-      container.innerHTML = items.map(function(item, index) {
-        var desc = item.description
-          ? '<div class="menu-item-desc">' + item.description + '</div>'
-          : '';
+      var guideHtml = priceGuide
+        ? '<div class="menu-price-guide">' + priceGuide + '</div>'
+        : '';
+      container.innerHTML = guideHtml + items.map(function(item, index) {
+        var hasDesc = item.description && item.description.trim().length > 0;
         var price = item.price
           ? '<span class="menu-item-price">' + item.price + '</span>'
           : '';
-        var delay = index * 60;
+        var delay = index * 40;
+        if (hasDesc) {
+          return '<div class="menu-item has-desc" data-reveal="fade-up" data-reveal-delay="' + delay + '">' +
+                 '<div class="menu-item-row">' +
+                 '<div class="menu-item-info"><div class="menu-item-name">' + (item.title || '') + '</div></div>' +
+                 price +
+                 '<span class="menu-item-chevron" aria-hidden="true">›</span>' +
+                 '</div>' +
+                 '<div class="menu-item-body" hidden>' +
+                 '<div class="menu-item-desc">' + item.description + '</div>' +
+                 '</div>' +
+                 '</div>';
+        }
         return '<div class="menu-item" data-reveal="fade-up" data-reveal-delay="' + delay + '">' +
-               '<div class="menu-item-info">' +
-               '<div class="menu-item-name">' + (item.title || '') + '</div>' +
-               desc +
-               '</div>' +
+               '<div class="menu-item-row">' +
+               '<div class="menu-item-info"><div class="menu-item-name">' + (item.title || '') + '</div></div>' +
                price +
+               '</div>' +
                '</div>';
       }).join('');
+
+      // Accordion click handler
+      container.addEventListener('click', function(e) {
+        var row = e.target.closest('.menu-item-row');
+        if (!row) return;
+        var item = row.closest('.menu-item.has-desc');
+        if (!item) return;
+        var body = item.querySelector('.menu-item-body');
+        var expanded = item.classList.toggle('expanded');
+        if (body) {
+          if (expanded) body.removeAttribute('hidden');
+          else body.setAttribute('hidden', '');
+        }
+      });
     }
 
     if (cfg.menu) {
       renderMenuSection('menu-section-entrees', cfg.menu.entrees);
       renderMenuSection('menu-section-soups', cfg.menu.soups);
-      renderMenuSection('menu-section-mains', cfg.menu.mains);
+      renderMenuSection('menu-section-salads', cfg.menu.salads);
+      renderMenuSection('menu-section-curries', cfg.menu.curries);
+      renderMenuSection('menu-section-noodles', cfg.menu.noodles);
+      renderMenuSection('menu-section-stirfried', cfg.menu.stirFried);
+      renderMenuSection('menu-section-specials', cfg.menu.specials);
       renderMenuSection('menu-section-desserts', cfg.menu.desserts);
     }
 
     // Contact buttons
     var btnAddress = document.getElementById('btn-address');
-    var btnEmail = document.getElementById('btn-email');
     var btnPhone = document.getElementById('btn-phone');
+    var btnPhone2 = document.getElementById('btn-phone2');
     var btnAddressText = document.getElementById('btn-address-text');
-    var btnEmailText = document.getElementById('btn-email-text');
     var btnPhoneText = document.getElementById('btn-phone-text');
+    var btnPhone2Text = document.getElementById('btn-phone2-text');
 
     if (btnAddress && cfg.addressLines && cfg.addressLines.length) {
       var addrQuery = encodeURIComponent(cfg.addressLines.join(', '));
@@ -132,18 +166,25 @@
       btnAddress.setAttribute('hidden', '');
     }
 
-    if (btnEmail && cfg.email) {
-      btnEmail.href = 'mailto:' + cfg.email;
-      if (btnEmailText) btnEmailText.textContent = cfg.email;
-    } else if (btnEmail) {
-      btnEmail.setAttribute('hidden', '');
-    }
-
     if (btnPhone && cfg.phoneNumber) {
-      btnPhone.href = 'tel:' + cfg.phoneNumber.replace(/\s|\(|\)|-/g, '');
+      btnPhone.href = 'tel:' + cleanPhone(cfg.phoneNumber);
       if (btnPhoneText) btnPhoneText.textContent = cfg.phoneNumber;
     } else if (btnPhone) {
       btnPhone.setAttribute('hidden', '');
+    }
+
+    if (btnPhone2 && cfg.phoneNumber2) {
+      btnPhone2.href = 'tel:' + cleanPhone(cfg.phoneNumber2);
+      if (btnPhone2Text) btnPhone2Text.textContent = cfg.phoneNumber2;
+      btnPhone2.removeAttribute('hidden');
+    }
+
+    // Service info badges (B.Y.O, Dine In, Takeaway, Delivery)
+    var servicesEl = document.getElementById('contact-services');
+    if (servicesEl && Array.isArray(cfg.serviceInfo) && cfg.serviceInfo.length) {
+      servicesEl.innerHTML = cfg.serviceInfo.map(function(s) {
+        return '<span class="contact-service">' + s + '</span>';
+      }).join('');
     }
 
     // Opening hours
@@ -154,66 +195,30 @@
       }).join('');
     }
 
-    // Reviews
+    // Reviews — overall rating display
     var reviewsSummary = document.getElementById('reviews-summary');
-    var reviewsList = document.getElementById('reviews-list');
 
     if (cfg.reviews && reviewsSummary) {
       var rating = cfg.reviews.overallRating || 0;
       var total = cfg.reviews.totalReviews || 0;
-      var stars = '\u2605'.repeat(Math.round(rating));
-      reviewsSummary.innerHTML = '<span class="reviews-stars-inline">' + stars + '</span> ' +
-        rating.toFixed(1) + ' out of 5 based on ' + total + ' reviews';
+      var fullStars = Math.floor(rating);
+      var emptyStars = 5 - fullStars;
+      var starsHtml = '<span class="reviews-stars-filled">' + '\u2605'.repeat(fullStars) + '</span>' +
+                      '<span class="reviews-stars-empty">' + '\u2605'.repeat(emptyStars) + '</span>';
+      reviewsSummary.innerHTML =
+        '<div class="reviews-rating-number">' + rating.toFixed(1) + '</div>' +
+        '<div class="reviews-stars-row">' + starsHtml + '</div>' +
+        '<div class="reviews-count">Based on ' + total + ' Google reviews</div>';
     }
 
-    if (cfg.reviews && reviewsList && Array.isArray(cfg.reviews.items)) {
-      reviewsList.innerHTML = cfg.reviews.items.map(function(r, index) {
-        var stars = '\u2605'.repeat(Math.max(0, Math.min(5, r.stars || 0)));
-        var delay = index * 100;
-        return '<div class="review-card" data-reveal="fade-up" data-reveal-delay="' + delay + '">' +
-               '<div class="review-stars">' + stars + '</div>' +
-               '<div class="review-text">' + (r.text || '') + '</div>' +
-               '<div class="review-author">' + (r.author || '') + '</div></div>';
-      }).join('');
+    // Google Reviews link
+    var reviewsGoogleLink = document.getElementById('reviews-google-link');
+    if (reviewsGoogleLink && cfg.googleMapsUrl) {
+      reviewsGoogleLink.href = cfg.googleMapsUrl;
+    } else if (reviewsGoogleLink) {
+      reviewsGoogleLink.closest('.reviews-google-cta').setAttribute('hidden', '');
     }
 
-    // Google Places reviews (optional)
-    async function loadPlacesReviews() {
-      var g = window.GOOGLE_PLACES || {};
-      if (!g.apiKey || !g.placeId) return;
-      try {
-        var url = 'https://places.googleapis.com/v1/places/' + encodeURIComponent(g.placeId);
-        var fieldMask = 'rating,userRatingsTotal,reviews';
-        var res = await fetch(url + '?fields=' + encodeURIComponent(fieldMask), {
-          headers: { 'X-Goog-Api-Key': g.apiKey, 'X-Goog-FieldMask': fieldMask }
-        });
-        if (!res.ok) throw new Error('Failed to fetch Google Places');
-        var data = await res.json();
-        if (reviewsSummary && typeof data.rating === 'number') {
-          var gRating = data.rating;
-          var gTotal = data.userRatingsTotal || 0;
-          var gStars = '\u2605'.repeat(Math.round(gRating));
-          reviewsSummary.innerHTML = '<span class="reviews-stars-inline">' + gStars + '</span> ' +
-            gRating.toFixed(1) + ' out of 5 on Google (' + gTotal + ' reviews)';
-        }
-        if (reviewsList && Array.isArray(data.reviews)) {
-          reviewsList.innerHTML = data.reviews.slice(0, 6).map(function(r, index) {
-            var stars = '\u2605'.repeat(Math.round(r.rating || 0));
-            var text = (r.text && (r.text.text || r.text)) || '';
-            var author = (r.authorAttribution && r.authorAttribution.displayName) || '';
-            var delay = index * 100;
-            return '<div class="review-card" data-reveal="fade-up" data-reveal-delay="' + delay + '">' +
-                   '<div class="review-stars">' + stars + '</div>' +
-                   '<div class="review-text">' + text + '</div>' +
-                   '<div class="review-author">' + author + '</div></div>';
-          }).join('');
-          initScrollReveal();
-        }
-      } catch (e) {
-        console.error('Error loading Google Places reviews:', e);
-      }
-    }
-    loadPlacesReviews();
 
     // Logo link — scroll to top
     var logoLink = document.getElementById('logo-link');
