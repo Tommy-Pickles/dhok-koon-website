@@ -15,7 +15,7 @@
     var logoImg = document.getElementById('logo-image');
     var footerLogoImg = document.getElementById('footer-logo-image');
     if (logoImg) {
-      logoImg.src = 'dok-koon-widelogo.png';
+      logoImg.src = 'dok-koon-widelogo-noBG.png';
       logoImg.onerror = function() { console.error('Wide logo not found'); };
     }
     if (footerLogoImg && cfg.logoUrl) {

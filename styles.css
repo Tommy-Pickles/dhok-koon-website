@@ -115,19 +115,17 @@ body {
 }
 
 .nav-logo-img {
-  height: 46px;
-  max-width: 200px;
+  height: 64px;
+  max-width: 260px;
   width: auto;
   object-fit: contain;
-  transition: filter 0.45s var(--ease), mix-blend-mode 0s;
-  /* Screen blend: white areas become transparent over dark hero backgrounds */
-  mix-blend-mode: screen;
-  filter: brightness(1.15) drop-shadow(0 0 12px rgba(201,164,76,0.25));
+  transform: translateZ(0);
+  transition: filter 0.45s var(--ease), height 0.45s var(--ease);
 }
 
 .scrolled .nav-logo-img {
-  mix-blend-mode: normal;
-  filter: none;
+  filter: brightness(0);
+  height: 52px;
 }
 
 .nav-links {
