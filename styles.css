@@ -733,7 +733,7 @@ body {
 
 /* Pricing guide bar */
 .menu-price-guide {
-  font-size: 0.775rem;
+  font-size: 0.875rem;
   color: var(--text-muted);
   font-style: italic;
   margin-bottom: 1.75rem;
@@ -792,11 +792,17 @@ body {
 
 .menu-item-price {
   font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 500;
+  font-size: 1.25rem;
+  font-weight: 600;
   color: var(--gold-dark);
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .menu-item-price {
+    font-size: 1.35rem;
+  }
 }
 
 .menu-item-chevron {
@@ -1234,4 +1240,66 @@ body {
     transform: none;
     transition: none;
   }
+}
+
+/* ============================================
+   About — extra paragraph
+   ============================================ */
+
+.about-extra {
+  margin-top: 1.5rem;
+  font-size: 1.025rem;
+  font-style: normal;
+  font-family: var(--font-body);
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* ============================================
+   FAQ Section (SEO)
+   ============================================ */
+
+.section-faq {
+  background: var(--bg-alt);
+  position: relative;
+}
+
+.section-faq::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-surface), var(--gold), var(--gold-surface), transparent);
+}
+
+.faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border-light);
+  padding: 1.75rem 0;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 0.75rem;
+  line-height: 1.35;
+}
+
+.faq-answer {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  line-height: 1.75;
+  margin: 0;
 }
