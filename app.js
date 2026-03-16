@@ -297,6 +297,26 @@
       }, { passive: true });
     }
 
+    // ---- FAQ accordion ----
+    var faqToggles = document.querySelectorAll('.faq-toggle');
+    faqToggles.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        // Close all others
+        faqToggles.forEach(function(other) {
+          other.setAttribute('aria-expanded', 'false');
+          var otherPanel = other.nextElementSibling;
+          if (otherPanel) otherPanel.classList.remove('open');
+        });
+        // Toggle clicked one
+        if (!expanded) {
+          btn.setAttribute('aria-expanded', 'true');
+          var panel = btn.nextElementSibling;
+          if (panel) panel.classList.add('open');
+        }
+      });
+    });
+
     // ---- Scroll-reveal animations ----
     initScrollReveal();
   }
