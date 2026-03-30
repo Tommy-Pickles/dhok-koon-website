@@ -3,7 +3,7 @@ window.SITE_CONFIG = {
   logoUrl: "Dhok-koon-logo.png",
   phoneNumber: "(02) 4283 7777",
   phoneNumber2: "(02) 4285 3984",
-  tagline: "Authentic Thai cuisine in Fairy Meadow — generous portions, lunch & dinner service.",
+  tagline: "",
   hoursSummary: "Open 7 days · Lunch 11:00am–2:30pm · Dinner 5:00pm–9:30pm",
   coverImageUrl: "dhokoon-cover-tables.jpg",
   addressLines: [

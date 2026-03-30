@@ -340,10 +340,10 @@ body {
   z-index: 1;
   background:
     linear-gradient(180deg,
-      rgba(26,9,20,0.40) 0%,
-      rgba(26,9,20,0.20) 20%,
-      rgba(26,9,20,0.55) 50%,
-      rgba(26,9,20,0.95) 100%
+      rgba(26,9,20,0.55) 0%,
+      rgba(26,9,20,0.35) 20%,
+      rgba(26,9,20,0.65) 50%,
+      rgba(26,9,20,0.97) 100%
     );
 }
 
@@ -374,7 +374,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.95);
+  color: var(--gold-light);
   margin: 0 0 0.75rem;
   text-shadow: 0 1px 16px rgba(0,0,0,0.8), 0 2px 4px rgba(0,0,0,0.6);
 }
@@ -416,7 +416,7 @@ body {
   letter-spacing: -0.01em;
   margin: 0 0 1.25rem;
   color: #fff;
-  text-shadow: 0 2px 24px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 32px rgba(0,0,0,0.8), 0 1px 6px rgba(0,0,0,0.5);
 }
 
 .hero-subtitle {
@@ -433,6 +433,10 @@ body {
   text-shadow: 0 1px 12px rgba(0,0,0,0.4);
 }
 
+.hero-subtitle:empty {
+  display: none;
+}
+
 .hero-meta {
   margin-bottom: 2.25rem;
 }
@@ -441,8 +445,8 @@ body {
   font-size: 1rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.8);
-  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 12px rgba(0,0,0,0.6), 0 1px 3px rgba(0,0,0,0.4);
 }
 
 .hero-actions {
@@ -566,7 +570,7 @@ body {
    ============================================ */
 
 .section-about {
-  background: var(--bg);
+  background: linear-gradient(180deg, var(--bg) 0%, #f7f0e8 100%);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -631,7 +635,7 @@ body {
    ============================================ */
 
 .section-menu {
-  background: var(--bg-alt);
+  background: linear-gradient(180deg, var(--bg-alt) 0%, #efe5d8 50%, var(--bg-alt) 100%);
   position: relative;
 }
 
@@ -641,7 +645,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 3px;
+  height: 4px;
   background: linear-gradient(90deg, var(--plum), var(--gold), var(--crimson), var(--gold), var(--plum));
 }
 
@@ -856,7 +860,7 @@ body {
    ============================================ */
 
 .section-reviews {
-  background: var(--bg);
+  background: linear-gradient(180deg, #f7f0e8 0%, var(--bg) 100%);
   position: relative;
   text-align: center;
 }
